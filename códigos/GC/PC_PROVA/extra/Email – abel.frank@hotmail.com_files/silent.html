@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- saved from url=(0259)https://a.lw.skype.com/Login/silent/MsaCallback?site_name=lw.skype.com&response_type=postmessage&client_id=580081&redirect_uri=https%3a%2f%2foutlook.live.com%2fowa%2f&state=silentloginsdk_1529503982228&partner=999&session_id=Of92cNwoXO5ULVCU9tIl&wa=wsignin1.0 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+
+    <title>Skype</title>
+
+    <script src="./HashFragment.js.download"></script>
+
+    <script type="text/javascript">
+        var message = "";
+        (function () {
+            var target = "https://outlook.live.com/owa/",
+                messageObject = {"skypetoken":"eyJhbGciOiJSUzI1NiIsImtpZCI6IjEwMSIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1Mjk1MDM5ODUsImV4cCI6MTUyOTU5MDM4Mywic2t5cGVpZCI6ImxpdmU6YWJlbC5mcmFuayIsInNjcCI6OTU4LCJjc2kiOiIxNTI5NTAzOTgzIiwiY2lkIjoiYTk3OTc5NjBlMDc3NzczNiIsImFhdCI6MTUyOTUwMzk3MX0.omEwPXV5YhVMKYbnX9Myj3NkW7yXS8Yoa78Eh46ufDxWyEgP9ixZDGXJaxx8Hpl2-LNsX5527H9WRmQPqQWH1PS3O-RAcQscqqHZHm_muRryDkR30P6l-087aM22sCdnNOPPfruxgKobSsyZKSVGRisJrF7En3a5CW03u5gN5TMMxAFjeuuzwcd-smNSq5dGRh6cIUUjjBWPH9GFo-qL-7ziaOkUi1URgJsA4blUdGnKBz5woKsVUeHZWSjOT89H26fyCqR3i0AiSKearxddgn9sVtoPi6hkNHjVxy6E_T85bS95cLKxFilPylYnAz-mHZjT4rDNabS7yNKJdsw5-w","expires_in":"86397","skypeid":"live:abel.frank","state":"silentloginsdk_1529503982228"};
+
+            window.hashFragment.parseHashParams();
+            var error = window.hashFragment.getHashParam("error");
+            var errorDescription = window.hashFragment.getHashParam("error_description");
+
+            if (!!error && error.length) {
+                messageObject.error = error;
+                messageObject.error_description = errorDescription;
+            }
+            
+            var message = JSON.stringify(messageObject);
+
+            if (!!window.opener) {                              // Send postMessage from a Popup and close window
+                window.opener.postMessage(message, target);
+                window.close();
+            } else if (!!window.parent) {                       // Send postMessage from an Iframe
+                window.parent.postMessage(message, target);
+            }
+        }());
+    </script>
+</head>
+<body>
+
+</body></html>

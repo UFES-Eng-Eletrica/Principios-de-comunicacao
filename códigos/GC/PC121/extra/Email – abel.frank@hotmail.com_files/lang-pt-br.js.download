@@ -1,0 +1,1 @@
+(function(){"use strict";var n=window.microsoft.createNS("adbar.renderers.UI");n.autoRefreshInterval=3e4,n.ADCHOICESGLINK="http://g.msn.com/AIPRIV/pt-br?adchc=1",n.ADCHOICESARIALABEL="Definir suas prefer\u00eancias de publicidade",n.ADCONTAINERARIALABEL="an\u00fancio"})()
