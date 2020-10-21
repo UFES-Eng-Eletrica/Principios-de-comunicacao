@@ -1,5 +1,7 @@
 # códigos-2020
 
+Os códigos que começam com '00' são scripts de apoio para outros exercícios.
+
 ## Analisador de espectro ou FFT_pot2.m
 
 Código utilizado pelo Jair para auxiliar nos outros códigos futuros. Eles são os mesmos códigos.
