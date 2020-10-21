@@ -22,7 +22,3 @@ Aproveitando os códigos acima, transfomar o audio em um vetor grande discreto p
 ## 03-Trabalando_com_imagens
 
 Código que filtra as cores e deixa apenas em escala de cinza (greyscale)
-
-## Arquivos 'introdução'
-
-Os códigos de introdução foram feitos pelo @mrtuckie. Grande parte é puro rascunho, mas rascunho de qualidade (mesmo que duvidosa).
