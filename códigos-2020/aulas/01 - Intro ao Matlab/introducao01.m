@@ -33,3 +33,7 @@ eye(10);
 rand(3,4)
 randn(4,4)
 %% Operacoes com matrizes
+% m(1) acessa o primeiro valor da matriz (e isso é muito podre, desculpa.) 
+%% Operações de plot
+% figure
+% plot(x,y,x1,y1,...,xn,yn)

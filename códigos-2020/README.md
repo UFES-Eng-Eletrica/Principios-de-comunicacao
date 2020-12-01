@@ -1,24 +1,20 @@
-# códigos-2020
+# EARTE
 
-Os códigos que começam com '00' são scripts de apoio para outros exercícios.
+Este repositório está em construção. Assim que as atualizações das aulas forem saindo, postarei um passo a passo para os estudos.
 
-## Analisador de espectro ou FFT_pot2.m
+## atividades
 
-Código utilizado pelo Jair para auxiliar nos outros códigos futuros. Eles são os mesmos códigos.
+Conjunto de PDF'S que o Jair enviou durante as aulas pelo Google Classroom.  Quem for generoso e puder compartilar um arquivo parecido com esse para mostrar os macetes das atividades, ficaremos gratos e pagaremos um salgado se possível :heart: .
 
-## Leitura de audio
+## aulas
 
-Código utilizado pelo Jair para auxiliar nos outros códigos futuros.
+Coleção das aulas que foram postadas durante o EARTE.
 
+## códigos
 
-## 01-Comandos_basicos
+Os arquivos aqui dentro ainda estão bagunçados, mas faremos um arquivo "README.md" para que as pessoas saibam o que tem nesses arquivos
 
-Código que demonstra comandos básicos do matlab.
+## macetes
 
-## 02-Trabalhando_com_audio
+Arquivos contendo macetes para matlab, pc, etc.
 
-Aproveitando os códigos acima, transfomar o audio em um vetor grande discreto para podermos trabalhar com áudio.
-
-## 03-Trabalando_com_imagens
-
-Código que filtra as cores e deixa apenas em escala de cinza (greyscale)

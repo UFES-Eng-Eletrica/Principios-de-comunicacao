@@ -14,11 +14,12 @@ clc, clear all, close all
 
 
 % ===============  Parâmetros de Simulação ==============================
-Fc      = 15e3;     % Frequencia Central da Modulação 
-snr     = 100;      % Relação Sinal-Ruído
+Fc      = 15e3;     % Frequencia Central da Modulação - 15kHz
+snr     = 100;      % Relação Sinal-Ruído 
 
 % ===============  Leitura do Sinal de Audio ============================
-[m, Fs]   = wavread('audio48kHz.wav');     % Carrega o sinal
+%[m, Fs]   = wavread('audio48kHz.wav');     % Carrega o sinal/original
+[m, Fs]   = audioread('audio48kHz.wav');
                                            % Compare Fs com Fc
 % =======================================================================
 

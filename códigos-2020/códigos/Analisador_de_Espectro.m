@@ -1,4 +1,7 @@
-function [Sinal_ff,sinal_tf,f,df] = FFT_pot2(sinal,ts) 
+function [Sinal_ff,sinal_tf,f,df] = FFT_pot2(sinal,ts)
+
+% entradas: sinal,ts
+% saída: Sinal_ff,sinal_tf,f,df
 
 fs = 1/ts;               % Taxa de amostragem
 ni = length(sinal);      % Tamanho do sinal de entrada
