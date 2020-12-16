@@ -1,0 +1,1 @@
+Pode conter material repetido e com o nome estranho.

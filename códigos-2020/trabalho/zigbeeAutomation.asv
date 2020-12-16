@@ -1,0 +1,78 @@
+load zigbeeAPPCaptures
+
+% Configura o Applications Support Sublayer
+[apsConfig, apsPayload] = zigbee.APSFrameDecoder(motionDetectedFrame);
+apsConfig
+
+% Configura o zigBee Cluster Library
+
+[zclConfig, zclPayload] = zigbee.ZCLFrameDecoder(apsPayload, apsConfig.ClusterID);
+zclConfig
+
+% Configura o Intruder Alert System ZoneConfig
+iasZoneConfig = zigbee.IASZoneFrameDecoder(zclPayload)
+
+% Roda o vídeo
+helperPlaybackVideo('video.mp4', 2/5);
+
+% objeto da Aplicação
+apsFrames = {motionDetectedFrame; turnOnFrame; motionStoppedFrame; turnOffFrame};
+for idx = 1:length(apsFrames)
+  % APS decoding:
+  [apsConfig, apsPayload] = zigbee.APSFrameDecoder(apsFrames{idx});
+  % ZCL header decoding:
+  [zclConfig, zclPayload] = zigbee.ZCLFrameDecoder(apsPayload, apsConfig.ClusterID);
+  zclConfig
+
+  % On-off cluster (does not have ZCL payload)
+  onOffClusterID = '0006';
+  if strcmp(apsConfig.ClusterID, onOffClusterID)
+    fprintf(['Turn light bulb ' lower(zclConfig.CommandType) '.\n']);
+  end
+
+  % Intruder Alarm System (IAS) Zone cluster has ZCL payload:
+  iasZoneClusterID = '0500';
+  if ~isempty(zclPayload) && strcmp(apsConfig.ClusterID, iasZoneClusterID)
+    iasConfig = zigbee.IASZoneFrameDecoder(zclPayload)
+
+    if any(strcmp('Alarmed', {iasConfig.Alarm1, iasConfig.Alarm2}))
+      fprintf('Motion detected.\n');
+    else
+      fprintf('Motion stopped.\n');
+    end
+  end
+end
+
+iasConfigIntrusion = zigbee.IASZoneFrameConfig('Alarm2', 'Alarmed');
+zclPayloadIntrusion = zigbee.IASZoneFrameGenerator(iasConfigIntrusion);
+
+iasConfigNoIntrusion = zigbee.IASZoneFrameConfig('Alarm2', 'Not alarmed');
+zclPayloadNoIntrusion = zigbee.IASZoneFrameGenerator(iasConfigNoIntrusion);
+
+% IAS Zone Cluster
+zclConfigIntrusion = zigbee.ZCLFrameConfig('FrameType', 'Cluster-specific', ...
+                                           'CommandType', 'Zone Status Change Notification', ...
+                                           'SequenceNumber', 1, 'Direction', 'Downlink');
+zclFrameIntrusion = zigbee.ZCLFrameGenerator(zclConfigIntrusion, zclPayloadIntrusion);
+
+% On/Off Cluster
+zclConfigOn = zigbee.ZCLFrameConfig('FrameType', 'Cluster-specific', ...
+                                    'CommandType', 'On', ...
+                                    'SequenceNumber', 2, 'Direction', 'Uplink');
+zclFrameOn = zigbee.ZCLFrameGenerator(zclConfigOn);
+
+% IAS Zone Cluster
+apsConfigIntrusion = zigbee.APSFrameConfig('FrameType', 'Data', ...
+                                           'ClusterID', iasZoneClusterID, ...
+                                           'ProfileID', zigbee.profileID('Home Automation'), ...
+                                           'APSCounter', 1, ...
+                                           'AcknowledgmentRequest', true);
+apsFrameIntrusion = zigbee.APSFrameGenerator(apsConfigIntrusion, zclFrameIntrusion);
+
+% On/Off cluster
+apsConfigOn = zigbee.APSFrameConfig('FrameType', 'Data', ...
+                                    'ClusterID', onOffClusterID, ...
+                                    'ProfileID', zigbee.profileID('Home Automation'), ...
+                                    'APSCounter', 2, ...
+                                    'AcknowledgmentRequest', true);
+apsFrameOn = zigbee.APSFrameGenerator(apsConfigOn, zclFrameOn);

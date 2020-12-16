@@ -1,4 +1,5 @@
 % Atividade feita por Arthur Lorencini Bergamaschi
+% Cheque sempre os arquivos "README.md" para obter mais informações.
 clc,clear
 %%
 % 1 - Gere  um  vetor  tempo  com  duração  de  1μs  e  1000  posições  e
@@ -11,13 +12,17 @@ duration = 10^-6;
 divisions = 1000;
 time = linspace(0,duration,divisions); % ('divisions' posições espaçadas de 'duration')
 timeInterval = time(2) - time(1); % Intervalo de tempo entre as amostras.
+                                  % É chamada de Resolução do domínio do
+                                  % tempo
+                                  % timeInterval ~= 1*10e-9 s
 
 %%
 % 2 - A partir do vetor tempo, crie um vetor frequência apto para analisar
-% o conteúdo espectral de sinais periódicosatravés da série exponencial
+% o conteúdo espectral de sinais periódico satravés da série exponencial
 % de Fourier.
 
 frequency = 1/timeInterval; % calculando a frequência fundamental.
+% f ~= 10e9, eu consigo pegar os sinais
 % Trivial, certo?
 
 % Lembrando que dá para criar um vetor linha ao fazer
@@ -25,7 +30,7 @@ frequency = 1/timeInterval; % calculando a frequência fundamental.
 % j:i:k -> [j, j+i,...,k]
 
 % Ok, mas oq q é q ele tá pedindo? WTF seria um vetor apto para isso?
-% Eu acredito que seja um vetor de mesma extensão do time, mas na freq...
+% Eu acredito que seja um vetor de mesma extensão do 'time', mas na freq...
 % Sendo metade positiva, metade negativa. Espectro simétrico, segundo
 % o CAP3 - Módulo 1. Imagino que as frequências são "discretas"
 % Essas frequências são as harmônicas. nf_0.
@@ -49,24 +54,27 @@ f = [positiveFreq negativeFreq];
 
 
 %%
-% 3 - Escolha uma frequência fcem Hz e crie um sinal senoidal x(t)com
-% frequência de oscilação fce “plote” um gráfico que ilustre o sinal
+% 3 - Escolha uma frequência 'fc' em Hz e crie um sinal senoidal x(t)com
+% frequência de oscilação 'fc' e “plote” um gráfico que ilustre o sinal
 % de mensagem criado.
 
 oscFreq = frequency/100; % (em [Hz])
 
 signalX = sin(2*pi*time*oscFreq); 
-% ele vai conter o mesmo tamanho do vetor time
+% Sempre lembrando que x(t) = A*sin(omega*t + phi), em que:
+% omega = w = 2*pi*f , t = tempo, phi = 'fase'
+% ele vai conter o mesmo tamanho do vetor 'time'
 % e tem que estar em radianos né galera.
 figure(1)
 plot(time,signalX)
 
 
 %%
-% 4 - Varie  o  valor  de fce  analise  o  efeito  da  amostragem  do
+% 4 - Varie  o  valor  de 'fc' e  analise  o  efeito  da  amostragem  do
 % sinal.
 % Que  conclusão  consegues encontrar durante esta tarefa? 
 
+% Agora faremos oscFreq ser 10x maior.
 oscFreq = frequency/10; % (em [Hz])
 
 signalX = sin(2*pi*time*oscFreq);
@@ -74,7 +82,8 @@ signalX = sin(2*pi*time*oscFreq);
 figure(2)
 plot(time,signalX)
 
-% Sei lá, to com sono.
+% Por algum motivo, que eu ainda não sei, a 'figure_2' aparentemente não
+% consegue chegar até +/- 1. 
 
 %%
 % 5 - Encontre a potência em dBm do sinal de mensagem gerado.
